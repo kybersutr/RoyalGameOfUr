@@ -8,25 +8,20 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\kyber\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Bája\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kyber\\Desktop\\skola\\2021_LS\\programovani\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr.csproj",
+      "projectUniqueName": "C:\\Users\\Bája\\Desktop\\baja\\skola\\programovani\\zapoctak\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr.csproj",
       "projectName": "RoyalGameOfUr",
-      "projectPath": "C:\\Users\\kyber\\Desktop\\skola\\2021_LS\\programovani\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr.csproj",
-      "packagesPath": "C:\\Users\\kyber\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kyber\\Desktop\\skola\\2021_LS\\programovani\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr\\obj\\",
+      "projectPath": "C:\\Users\\Bája\\Desktop\\baja\\skola\\programovani\\zapoctak\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr.csproj",
+      "packagesPath": "C:\\Users\\Bája\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bája\\Desktop\\baja\\skola\\programovani\\zapoctak\\RoyalGameOfUr\\RoyalGameOfUr\\RoyalGameOfUr\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\kyber\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Bája\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -66,7 +61,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
