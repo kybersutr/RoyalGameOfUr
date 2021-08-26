@@ -11,13 +11,19 @@ namespace RoyalGameOfUr
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        public static Form1 menu = new Form1();
+        public static GameForm game = new GameForm();
+        public static bool multiplayer = false;
+        public static int difficulty = 0;
+
         [STAThread]
+
         static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(menu);
         }
     }
 }

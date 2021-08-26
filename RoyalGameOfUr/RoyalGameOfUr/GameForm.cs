@@ -14,5 +14,12 @@ namespace RoyalGameOfUr
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Program.menu.Show();
+        }
+
     }
 }

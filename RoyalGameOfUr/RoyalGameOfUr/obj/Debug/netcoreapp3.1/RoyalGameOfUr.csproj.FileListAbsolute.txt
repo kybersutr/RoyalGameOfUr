@@ -1,0 +1,16 @@
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\bin\Debug\netcoreapp3.1\RoyalGameOfUr.exe
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\bin\Debug\netcoreapp3.1\RoyalGameOfUr.deps.json
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\bin\Debug\netcoreapp3.1\RoyalGameOfUr.runtimeconfig.json
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\bin\Debug\netcoreapp3.1\RoyalGameOfUr.runtimeconfig.dev.json
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\bin\Debug\netcoreapp3.1\RoyalGameOfUr.dll
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\bin\Debug\netcoreapp3.1\RoyalGameOfUr.pdb
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.csprojAssemblyReference.cache
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.Form1.resources
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.csproj.GenerateResource.cache
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.AssemblyInfoInputs.cache
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.AssemblyInfo.cs
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.csproj.CoreCompileInputs.cache
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.dll
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.pdb
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.genruntimeconfig.cache
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.GameForm.resources
