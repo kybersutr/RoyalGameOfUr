@@ -6,5 +6,7 @@ namespace RoyalGameOfUr
 {
     interface Player
     {
+        public void ThrowDice();
+        public void ChooseToken();
     }
 }

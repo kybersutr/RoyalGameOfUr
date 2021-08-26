@@ -21,5 +21,22 @@ namespace RoyalGameOfUr
             Program.menu.Show();
         }
 
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+            DrawGame();
+        }
+
+        public void DrawGame() 
+        {
+            DrawTiles();
+            DrawDice();
+            DrawPlayers();
+            WriteScores();
+        }
+
+        private void DrawTiles() { }
+        private void DrawDice() { }
+        private void DrawPlayers() { }
+        private void WriteScores() { }
     }
 }

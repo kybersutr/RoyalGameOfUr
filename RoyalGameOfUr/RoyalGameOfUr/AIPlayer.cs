@@ -12,5 +12,8 @@ namespace RoyalGameOfUr
         {
             this.difficulty = difficulty;
         }
+
+        public void ThrowDice() { }
+        public void ChooseToken() { }
     }
 }

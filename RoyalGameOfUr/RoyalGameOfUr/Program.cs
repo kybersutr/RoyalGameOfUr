@@ -13,8 +13,6 @@ namespace RoyalGameOfUr
         /// </summary>
         public static Form1 menu = new Form1();
         public static GameForm gameForm = new GameForm();
-        public static bool multiplayer = false;
-        public static int difficulty = 0;
         public static Game game;
 
 

@@ -19,9 +19,9 @@ namespace RoyalGameOfUr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Program.multiplayer = false;
+            Program.game = new Game(true, -1);
             this.Hide();
-            Program.gameForm.Show();
+            Program.gameForm.ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,17 +32,19 @@ namespace RoyalGameOfUr
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int difficulty;
+
             if (radioButton1.Checked) 
             {
-                Program.difficulty = 0;
+                difficulty = 0;
             }
             else if (radioButton2.Checked) 
             {
-                Program.difficulty = 1;
+                difficulty = 1;
             }
             else if (radioButton3.Checked)
             {
-                Program.difficulty = 2;
+                difficulty = 2;
             }
             else 
             {
@@ -50,9 +52,9 @@ namespace RoyalGameOfUr
                 return;
             }
 
-            Program.multiplayer = true;
+            Program.game = new Game(false, difficulty);
             this.Hide();
-            Program.gameForm.Show();
+            Program.gameForm.ShowDialog();
         }
     }
 }

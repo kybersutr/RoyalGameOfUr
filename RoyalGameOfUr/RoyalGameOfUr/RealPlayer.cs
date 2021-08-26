@@ -6,5 +6,7 @@ namespace RoyalGameOfUr
 {
     class RealPlayer:Player
     {
+        public void ThrowDice() { }
+        public void ChooseToken() { }
     }
 }
