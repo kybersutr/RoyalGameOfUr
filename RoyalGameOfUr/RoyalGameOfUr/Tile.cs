@@ -6,10 +6,10 @@ namespace RoyalGameOfUr
 {
     class Tile
     {
-        public int type; 
+        public int type;
         // 0: placeholder empty tile
         // 1: normal tile
-        // 2: rosette tile
+        // 2: rosette tile\
 
         public Tile(int type)
         {

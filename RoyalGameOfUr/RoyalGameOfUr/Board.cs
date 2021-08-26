@@ -8,15 +8,8 @@ namespace RoyalGameOfUr
     {
         public int width;
         public int height;
-
-        public Board(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
-        }
-
         public List<Dice> dice = new List<Dice>() { new Dice(), new Dice(), new Dice(), new Dice() };
-        public List<Tile> tiles = new List<Tile>() 
+        public List<Tile> tiles = new List<Tile>()
         {
             // tiles are numbered in order <- first row, -> second row, <- third row
             new Tile(1),
@@ -30,8 +23,8 @@ namespace RoyalGameOfUr
             new Tile(1),
             new Tile(1),
             new Tile(1),
-            new Tile(2),
             new Tile(1),
+            new Tile(2),
             new Tile(1),
             new Tile(1),
             new Tile(1),
@@ -44,5 +37,13 @@ namespace RoyalGameOfUr
             new Tile(1),
             new Tile(2),
         };
+
+        public Board(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
+
+
     }
 }

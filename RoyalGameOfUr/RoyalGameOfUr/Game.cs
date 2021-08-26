@@ -8,7 +8,7 @@ namespace RoyalGameOfUr
     {
         private Player player1;
         private Player player2;
-        private Board board;
+        public Board board;
 
         public Game(bool multiplayer, int difficulty) 
         {
