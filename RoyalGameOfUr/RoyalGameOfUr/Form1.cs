@@ -21,7 +21,7 @@ namespace RoyalGameOfUr
         {
             Program.multiplayer = false;
             this.Hide();
-            Program.game.Show();
+            Program.gameForm.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace RoyalGameOfUr
 
             Program.multiplayer = true;
             this.Hide();
-            Program.game.Show();
+            Program.gameForm.Show();
         }
     }
 }
