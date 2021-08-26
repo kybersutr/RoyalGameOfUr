@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    interface RealPlayer
+    class RealPlayer:Player
     {
     }
 }
