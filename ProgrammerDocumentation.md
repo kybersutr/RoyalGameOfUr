@@ -1,2 +1,2 @@
-![Tile numbering](.\images\numbering.png)
+![Tile numbering](images\numbering.png)
 
