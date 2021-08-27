@@ -31,7 +31,7 @@ namespace RoyalGameOfUr
         {
             DrawTiles();
             DrawDice();
-            DrawPlayers();
+            DrawTokens();
             WriteScores();
             MessageBox.Show("pauza na kafíčko");
         }
@@ -115,7 +115,9 @@ namespace RoyalGameOfUr
             }
             
         }
-        private void DrawPlayers() { }
+
+        private void DrawToken() { }
+        private void DrawTokens() { }
         private void WriteScores() { }
     }
 }

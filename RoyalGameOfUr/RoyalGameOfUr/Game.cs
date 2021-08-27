@@ -6,8 +6,8 @@ namespace RoyalGameOfUr
 {
     class Game
     {
-        public Player player1;
-        public Player player2;
+        public IPlayer player1;
+        public IPlayer player2;
         public Board board;
 
         public Game(bool multiplayer, int difficulty) 
@@ -29,6 +29,14 @@ namespace RoyalGameOfUr
         public void CreateBoard() 
         {
             this.board = new Board();
+        }
+
+        public void Loop() 
+        {
+            Program.gameForm.DrawGame();
+            player1.ThrowDice();
+            Program.gameForm.DrawGame();
+
         }
     }
 }

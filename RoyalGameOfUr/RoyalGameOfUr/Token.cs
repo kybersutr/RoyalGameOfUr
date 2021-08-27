@@ -6,6 +6,6 @@ namespace RoyalGameOfUr
 {
     class Token
     {
-        public Tile tile;
+        public int tile;
     }
 }

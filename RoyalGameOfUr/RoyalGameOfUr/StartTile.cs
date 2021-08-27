@@ -6,6 +6,6 @@ namespace RoyalGameOfUr
 {
     class StartTile:EmptyTile
     {
-        public StartTile(Player p) : base(p) { }
+        public StartTile(IPlayer p) : base(p) { }
     }
 }

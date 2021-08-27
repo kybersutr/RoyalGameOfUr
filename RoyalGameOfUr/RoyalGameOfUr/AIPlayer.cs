@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    class AIPlayer:Player
+    class AIPlayer:IPlayer
     {
         private int difficulty;
 
@@ -13,7 +13,13 @@ namespace RoyalGameOfUr
             this.difficulty = difficulty;
         }
 
-        public void ThrowDice() { }
+        public void ThrowDice() 
+        {
+            foreach (Dice dice in Program.game.board.dice) 
+            {
+                dice.Throw();
+            }
+        }
         public void ChooseToken() { }
     }
 }

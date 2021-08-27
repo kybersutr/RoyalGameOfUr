@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    interface Player
+    interface IPlayer
     {
         public void ThrowDice();
         public void ChooseToken();
