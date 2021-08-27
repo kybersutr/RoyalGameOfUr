@@ -4,8 +4,8 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    class Token
+    class EndTile : EmptyTile
     {
-        public Tile tile;
+        public EndTile(Player p) : base(p) { }
     }
 }

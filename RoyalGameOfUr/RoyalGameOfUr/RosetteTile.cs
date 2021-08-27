@@ -4,8 +4,7 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    class Token
+    class RosetteTile:Tile
     {
-        public Tile tile;
     }
 }

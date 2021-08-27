@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 
 namespace RoyalGameOfUr
 {
@@ -20,6 +22,7 @@ namespace RoyalGameOfUr
         private void button1_Click(object sender, EventArgs e)
         {
             Program.game = new Game(true, -1);
+            Program.game.CreateBoard();
             this.Hide();
             Program.gameForm.ShowDialog();
         }
@@ -53,8 +56,13 @@ namespace RoyalGameOfUr
             }
 
             Program.game = new Game(false, difficulty);
+            Program.game.CreateBoard();
             this.Hide();
             Program.gameForm.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
     }
 }

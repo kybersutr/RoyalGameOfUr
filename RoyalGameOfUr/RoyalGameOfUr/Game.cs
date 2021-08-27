@@ -6,13 +6,12 @@ namespace RoyalGameOfUr
 {
     class Game
     {
-        private Player player1;
-        private Player player2;
+        public Player player1;
+        public Player player2;
         public Board board;
 
         public Game(bool multiplayer, int difficulty) 
         {
-            this.board = new Board(1,5);
 
             if (multiplayer)
             {
@@ -24,6 +23,12 @@ namespace RoyalGameOfUr
                 this.player1 = new RealPlayer();
                 this.player2 = new AIPlayer(difficulty);
             }
+
+        }
+
+        public void CreateBoard() 
+        {
+            this.board = new Board();
         }
     }
 }

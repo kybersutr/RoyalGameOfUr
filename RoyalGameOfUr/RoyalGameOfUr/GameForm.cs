@@ -18,7 +18,6 @@ namespace RoyalGameOfUr
         private void button1_Click(object sender, EventArgs e)
         {
             DrawGame();
-            MessageBox.Show("cus");
             this.Hide();
             Program.menu.Show();
         }
@@ -34,6 +33,7 @@ namespace RoyalGameOfUr
             DrawDice();
             DrawPlayers();
             WriteScores();
+            MessageBox.Show("pauza na kafíčko");
         }
 
         private void DrawTiles() 
@@ -46,6 +46,10 @@ namespace RoyalGameOfUr
         
         }
 
+        private void FillCircle(Graphics g, Brush b, int x, int y, int radius) 
+        {
+            g.FillEllipse(b, new Rectangle(x - radius, y - radius, 2 * radius, 2 * radius));
+        }
         private void DrawTile(Tile tile, int i, int size) 
         {
             using (Graphics g = this.CreateGraphics()) 
@@ -53,7 +57,7 @@ namespace RoyalGameOfUr
                 int x = ClientSize.Width - 3 * size - (i % 8) * size;
                 int y = ((i / 8) + 1) * size;
                 Rectangle rect = new Rectangle(x, y, size, size);
-                if (tile.type != 0)
+                if (!(tile is StartTile | tile is EndTile))
                 {
                     using (Brush brush = new SolidBrush(Color.Bisque))
                     {
@@ -65,14 +69,52 @@ namespace RoyalGameOfUr
                     }
                     Image rosette = Image.FromFile("rosette.png");
 
-                    if (tile.type == 2)
+                    if (tile is RosetteTile)
                     {
                         g.DrawImage(rosette, rect);
                     }
                 }
             }
         }
-        private void DrawDice() { }
+
+        private void DrawSingleDice(Dice dice, int i, int size) 
+        {
+            using (Graphics g = this.CreateGraphics())
+            {
+                int top = (9 * size)/2;
+                int bot = top + (int)((Math.Sqrt(3) / 2) * size);
+                int left = ClientSize.Width / 2 - 2 * size + i * size;
+                int right = ClientSize.Width / 2 - size + i * size;
+                int mid = (left + right) / 2;
+                Point[] triangle =
+                {
+                    new Point(mid, top),
+                    new Point(left, bot),
+                    new Point(right, bot),
+                };
+                using (Brush brush = new SolidBrush(Color.Black))
+                {
+                    g.FillPolygon(brush, triangle);
+                }
+                if (dice.dot)
+                {
+                    int radius = size / 8;
+                    using (Brush brush = new SolidBrush(Color.White))
+                    {
+                        FillCircle(g, brush, mid, top + 2*(bot - top)/3, radius);
+                    }
+                }
+            }
+        }
+        private void DrawDice() 
+        {
+            for (int i = 0; i < Program.game.board.dice.Count; ++i) 
+            {
+                int size = ClientSize.Width / 12;
+                DrawSingleDice(Program.game.board.dice[i], i, size);
+            }
+            
+        }
         private void DrawPlayers() { }
         private void WriteScores() { }
     }
