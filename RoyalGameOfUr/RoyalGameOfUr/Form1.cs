@@ -57,9 +57,9 @@ namespace RoyalGameOfUr
 
         private void StartGame(bool multiplayer, int difficulty) 
         {
+            Program.gameForm = new GameForm();
             Program.game = new Game(multiplayer, difficulty);
             Program.game.CreateBoard();
-            Program.gameForm = new GameForm();
             this.Hide();
             Program.gameForm.ShowDialog();
         }

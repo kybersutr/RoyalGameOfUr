@@ -4,9 +4,10 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    interface IPlayer
+    abstract class Player
     {
-        public void ThrowDice();
-        public Token ChooseToken();
+        public List<Token> tokens;
+        abstract public void ThrowDice();
+        abstract public Token ChooseToken();
     }
 }

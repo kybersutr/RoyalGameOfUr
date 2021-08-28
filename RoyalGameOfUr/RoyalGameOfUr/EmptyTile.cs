@@ -6,9 +6,9 @@ namespace RoyalGameOfUr
 {
     class EmptyTile:Tile
     {
-        public IPlayer belongsTo;
+        public Player belongsTo;
 
-        public EmptyTile(IPlayer belongsTo)
+        public EmptyTile(Player belongsTo)
         {
             this.belongsTo = belongsTo;
         }

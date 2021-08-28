@@ -141,7 +141,10 @@ namespace RoyalGameOfUr
         }
 
         private void DrawToken() { }
-        private void DrawTokens() { }
+        private void DrawTokens() 
+        {
+            foreach (Token token in Program.game.player1.tokens) { }
+        }
         private void WriteScores() { }
 
         private void button2_Click(object sender, EventArgs e)
@@ -155,7 +158,7 @@ namespace RoyalGameOfUr
             Program.game.phase += 1;
         }
 
-        private void Win(IPlayer winner) 
+        private void Win(Player winner) 
         {
             timer1.Stop();
             MessageBox.Show(winner + " is the winner!");
@@ -164,7 +167,7 @@ namespace RoyalGameOfUr
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            IPlayer winner = Program.game.CheckWinner();
+            Player winner = Program.game.CheckWinner();
             if (!(winner is null))
             {
                 Win(winner);

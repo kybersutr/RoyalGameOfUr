@@ -4,15 +4,21 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    class RealPlayer : IPlayer
+    class RealPlayer : Player
     {
-        public void ThrowDice()
+
+        public RealPlayer(List<Token> tokens)
+        {
+            this.tokens = tokens;
+        }
+
+        public override void ThrowDice()
         {
             Program.gameForm.button2.Visible = true;
 
         }
-        public Token ChooseToken() {
-            return new Token();
+        public override Token ChooseToken() {
+            return tokens[0];
         }
     }
 }

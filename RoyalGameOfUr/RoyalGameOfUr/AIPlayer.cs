@@ -4,25 +4,26 @@ using System.Text;
 
 namespace RoyalGameOfUr
 {
-    class AIPlayer:IPlayer
+    class AIPlayer:Player
     {
         private int difficulty;
 
-        public AIPlayer(int difficulty)
+        public AIPlayer(int difficulty, List<Token> tokens)
         {
             this.difficulty = difficulty;
+            this.tokens = tokens;
         }
 
-        public void ThrowDice() 
+        public override void ThrowDice() 
         {
             foreach (Dice dice in Program.game.board.dice) 
             {
                 dice.Throw();
             }
         }
-        public Token ChooseToken() 
+        public override Token ChooseToken() 
         {
-            return new Token();
+            return tokens[0];
         }
     }
 }

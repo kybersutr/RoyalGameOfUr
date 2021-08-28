@@ -6,6 +6,6 @@ namespace RoyalGameOfUr
 {
     class Tile
     {
-        public IPlayer occupiedBy;
+        public Player occupiedBy;
     }
 }
