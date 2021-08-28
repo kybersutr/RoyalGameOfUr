@@ -12,7 +12,7 @@ namespace RoyalGameOfUr
         ///  The main entry point for the application.
         /// </summary>
         public static Form1 menu = new Form1();
-        public static GameForm gameForm = new GameForm();
+        public static GameForm gameForm;
         public static Game game;
 
 

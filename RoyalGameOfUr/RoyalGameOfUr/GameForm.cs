@@ -17,13 +17,18 @@ namespace RoyalGameOfUr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DrawGame();
+            Menu();
+        }
+
+        private void Menu() 
+        {
             this.Hide();
             Program.menu.Show();
         }
 
         private void GameForm_Load(object sender, EventArgs e)
         {
+            timer1.Start();
             DrawGame();
         }
 
@@ -33,7 +38,6 @@ namespace RoyalGameOfUr
             DrawDice();
             DrawTokens();
             WriteScores();
-            MessageBox.Show("pauza na kafíčko");
         }
 
         private void DrawTiles() 
@@ -119,5 +123,45 @@ namespace RoyalGameOfUr
         private void DrawToken() { }
         private void DrawTokens() { }
         private void WriteScores() { }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Throw dice button
+            foreach (Dice dice in Program.game.board.dice)
+            {
+                dice.Throw();
+            }
+            button2.Visible = false;
+            Program.game.phase += 1;
+        }
+
+        private void Win(IPlayer winner) 
+        {
+            timer1.Stop();
+            MessageBox.Show(winner + " is the winner!");
+            Menu();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            IPlayer winner = Program.game.CheckWinner();
+            if (!(winner is null))
+            {
+                Win(winner);
+            }
+
+
+            if (Program.game.phase == 0)
+            {
+                DrawGame();
+                Program.game.WhoIsPlaying().ThrowDice();
+                Program.game.phase += 1;
+            }
+            else if (Program.game.phase == 2) 
+            {
+                DrawGame();
+            }
+
+        }
     }
 }

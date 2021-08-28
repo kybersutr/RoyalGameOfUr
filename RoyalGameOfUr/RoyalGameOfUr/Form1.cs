@@ -21,10 +21,7 @@ namespace RoyalGameOfUr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Program.game = new Game(true, -1);
-            Program.game.CreateBoard();
-            this.Hide();
-            Program.gameForm.ShowDialog();
+            StartGame(true, -1);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -55,8 +52,14 @@ namespace RoyalGameOfUr
                 return;
             }
 
-            Program.game = new Game(false, difficulty);
+            StartGame(false, difficulty);
+        }
+
+        private void StartGame(bool multiplayer, int difficulty) 
+        {
+            Program.game = new Game(multiplayer, difficulty);
             Program.game.CreateBoard();
+            Program.gameForm = new GameForm();
             this.Hide();
             Program.gameForm.ShowDialog();
         }

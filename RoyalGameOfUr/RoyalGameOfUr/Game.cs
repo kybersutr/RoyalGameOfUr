@@ -9,8 +9,18 @@ namespace RoyalGameOfUr
         public IPlayer player1;
         public IPlayer player2;
         public Board board;
+        private int winning_count = 7;
+        public bool turn = true; // true = player1's turn, false = player2's turn
+        
+        // game phases: 
+        // 0 = letting player throw dice, 
+        // 1 = waiting for player to throw dice,
+        // 2 = player threw dice, letting player choose token
+        // 3 = waiting for player to choose token
+        // 4 = moving token, deciding who plays next
+        public int phase = 0;
 
-        public Game(bool multiplayer, int difficulty) 
+        public Game(bool multiplayer, int difficulty)
         {
 
             if (multiplayer)
@@ -18,7 +28,7 @@ namespace RoyalGameOfUr
                 this.player1 = new RealPlayer();
                 this.player2 = new RealPlayer();
             }
-            else 
+            else
             {
                 this.player1 = new RealPlayer();
                 this.player2 = new AIPlayer(difficulty);
@@ -26,17 +36,36 @@ namespace RoyalGameOfUr
 
         }
 
-        public void CreateBoard() 
+        public IPlayer WhoIsPlaying() 
+        {
+            if (turn)
+            {
+                return player1;
+            }
+            else 
+            {
+                return player2;
+            }
+        }
+
+        public void CreateBoard()
         {
             this.board = new Board();
         }
 
-        public void Loop() 
+        public IPlayer CheckWinner() 
         {
-            Program.gameForm.DrawGame();
-            player1.ThrowDice();
-            Program.gameForm.DrawGame();
-
+            foreach (Tile tile in board.tiles) 
+            {
+                if (tile is EndTile) 
+                {
+                    if (((EndTile)tile).count == winning_count) 
+                    {
+                        return ((EndTile)tile).belongsTo;
+                    }
+                }
+            }
+            return null;
         }
     }
 }
