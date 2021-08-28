@@ -13,12 +13,12 @@ namespace RoyalGameOfUr
         public bool turn = true; // true = player1's turn, false = player2's turn
         
         // game phases: 
-        // 0 = letting player throw dice, 
+        // 0 = draw board, let player throw dice, 
         // 1 = waiting for player to throw dice,
-        // 2 = player threw dice, letting player choose token
-        // 3 = waiting for player to choose token
+        // 2 = player threw dice, redraw board
+        // 3 = letting player choose token
         // 4 = moving token, deciding who plays next
-        public int phase = 0;
+        public int phase;
 
         public Game(bool multiplayer, int difficulty)
         {

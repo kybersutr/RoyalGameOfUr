@@ -11,6 +11,8 @@ namespace RoyalGameOfUr
             Program.gameForm.button2.Visible = true;
 
         }
-        public void ChooseToken() { }
+        public Token ChooseToken() {
+            return new Token();
+        }
     }
 }

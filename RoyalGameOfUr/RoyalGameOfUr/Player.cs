@@ -7,6 +7,6 @@ namespace RoyalGameOfUr
     interface IPlayer
     {
         public void ThrowDice();
-        public void ChooseToken();
+        public Token ChooseToken();
     }
 }

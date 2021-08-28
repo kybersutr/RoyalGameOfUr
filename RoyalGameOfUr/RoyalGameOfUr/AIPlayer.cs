@@ -20,6 +20,9 @@ namespace RoyalGameOfUr
                 dice.Throw();
             }
         }
-        public void ChooseToken() { }
+        public Token ChooseToken() 
+        {
+            return new Token();
+        }
     }
 }

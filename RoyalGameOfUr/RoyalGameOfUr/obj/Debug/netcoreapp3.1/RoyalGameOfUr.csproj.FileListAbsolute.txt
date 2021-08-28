@@ -14,3 +14,4 @@ C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\Ro
 C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.pdb
 C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.genruntimeconfig.cache
 C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.GameForm.resources
+C:\Users\kyber\Desktop\skola\2021_LS\programovani\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\RoyalGameOfUr\obj\Debug\netcoreapp3.1\RoyalGameOfUr.Properties.Resources.resources

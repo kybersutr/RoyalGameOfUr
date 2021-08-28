@@ -13,6 +13,7 @@ namespace RoyalGameOfUr
         public GameForm()
         {
             InitializeComponent();
+            this.ResizeEnd += Resized;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -22,6 +23,7 @@ namespace RoyalGameOfUr
 
         private void Menu() 
         {
+            timer1.Stop();
             this.Hide();
             Program.menu.Show();
         }
@@ -61,11 +63,12 @@ namespace RoyalGameOfUr
                 int x = ClientSize.Width - 3 * size - (i % 8) * size;
                 int y = ((i / 8) + 1) * size;
                 Rectangle rect = new Rectangle(x, y, size, size);
+                Rectangle fillRect = new Rectangle(x + 1, y + 1, size - 1, size - 1);
                 if (!(tile is StartTile | tile is EndTile))
                 {
                     using (Brush brush = new SolidBrush(Color.Bisque))
                     {
-                        g.FillRectangle(brush, rect);
+                        g.FillRectangle(brush, fillRect);
                     }
                     using (Pen pen = new Pen(Color.Black))
                     {
@@ -75,7 +78,24 @@ namespace RoyalGameOfUr
 
                     if (tile is RosetteTile)
                     {
-                        g.DrawImage(rosette, rect);
+                        g.DrawImage(rosette, fillRect);
+                    }
+                }
+                if (tile is EndTile) 
+                {
+                    string text1 = ((EndTile)tile).count.ToString();
+                    using (Font font1 = new Font("Arial", size/2, FontStyle.Bold, GraphicsUnit.Point))
+                    {
+                        using (Brush brush = new SolidBrush(Control.DefaultBackColor))
+                        {
+                            g.FillRectangle(brush, fillRect);
+                        }
+                        using (Brush brush = new SolidBrush(Color.DarkGray)) 
+                        {
+                            StringFormat format = new StringFormat();
+                            format.Alignment = StringAlignment.Center;
+                            g.DrawString(text1, font1, brush, fillRect, format);
+                        }
                     }
                 }
             }
@@ -150,18 +170,51 @@ namespace RoyalGameOfUr
                 Win(winner);
             }
 
-
-            if (Program.game.phase == 0)
+            switch (Program.game.phase)
             {
-                DrawGame();
-                Program.game.WhoIsPlaying().ThrowDice();
-                Program.game.phase += 1;
-            }
-            else if (Program.game.phase == 2) 
-            {
-                DrawGame();
+                case 0:
+                    DrawGame();
+                    Program.game.WhoIsPlaying().ThrowDice();
+                    Program.game.phase += 1;
+                    break;
+                case 1:
+                    // Waiting for player to throw dice
+                    break;
+                case 2:
+                    DrawDice();
+                    Program.game.phase += 1;
+                    break;
+                case 3:
+                    //let player choose token
+                    Token token = Program.game.WhoIsPlaying().ChooseToken();
+                    if (!(token is null)) 
+                    {
+                        Program.game.phase += 1;
+                    }
+                    break;
+
+                case 4:
+                    DrawTiles();
+                    DrawTokens();
+                    Program.game.phase = 0;
+                    break;
             }
 
+        }
+
+        private void Resized(object sender, EventArgs e)
+        {
+            DrawGame();
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("7 clicked.");
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("6 clicked.");
         }
     }
 }
