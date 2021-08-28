@@ -30,21 +30,21 @@ namespace RoyalGameOfUr
                     new Token(3, Program.gameForm.white0),
                     new Token(3, Program.gameForm.white1), 
                     new Token(3, Program.gameForm.white2),
-                    new Token(3, Program.gameForm.white3),
-                    new Token(3, Program.gameForm.white4),
+                    new Token(5, Program.gameForm.white3),
+                    new Token(16, Program.gameForm.white4),
                     new Token(3, Program.gameForm.white5),
                     new Token(3, Program.gameForm.white6)
                 }
                 );
                 this.player2 = new RealPlayer(new List<Token>()
                 {
-                    new Token(3, Program.gameForm.black0),
-                    new Token(3, Program.gameForm.black1),
-                    new Token(3, Program.gameForm.black2),
-                    new Token(3, Program.gameForm.black3),
-                    new Token(3, Program.gameForm.black4),
-                    new Token(3, Program.gameForm.black5),
-                    new Token(3, Program.gameForm.black6)
+                    new Token(19, Program.gameForm.black0),
+                    new Token(19, Program.gameForm.black1),
+                    new Token(19, Program.gameForm.black2),
+                    new Token(19, Program.gameForm.black3),
+                    new Token(19, Program.gameForm.black4),
+                    new Token(19, Program.gameForm.black5),
+                    new Token(19, Program.gameForm.black6)
                 }
                 );
             }
@@ -63,13 +63,13 @@ namespace RoyalGameOfUr
                 );
                 this.player2 = new AIPlayer(difficulty, new List<Token>()
                 {
-                    new Token(3, Program.gameForm.black0),
-                    new Token(3, Program.gameForm.black1),
-                    new Token(3, Program.gameForm.black2),
-                    new Token(3, Program.gameForm.black3),
-                    new Token(3, Program.gameForm.black4),
-                    new Token(3, Program.gameForm.black5),
-                    new Token(3, Program.gameForm.black6)
+                    new Token(19, Program.gameForm.black0),
+                    new Token(19, Program.gameForm.black1),
+                    new Token(19, Program.gameForm.black2),
+                    new Token(19, Program.gameForm.black3),
+                    new Token(19, Program.gameForm.black4),
+                    new Token(19, Program.gameForm.black5),
+                    new Token(19, Program.gameForm.black6)
                 }
                 );
             }

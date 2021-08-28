@@ -140,10 +140,33 @@ namespace RoyalGameOfUr
             
         }
 
-        private void DrawToken() { }
+        private void DrawToken(Token token) 
+        {
+            if (Program.game.board.tiles[token.tile] is StartTile)
+            {
+                token.image.BackColor = DefaultBackColor;
+            }
+            else 
+            {
+                token.image.BackColor = Color.Bisque;
+            }
+            int size = ClientSize.Width / 12;
+            token.image.Size = new Size((size) - 2, (size) - 2);
+            token.image.Location = new Point(
+                ClientSize.Width - 3 * size - (token.tile % 8) * size + 1,
+                ((token.tile / 8) + 1) * size + 1
+                );
+        }
         private void DrawTokens() 
         {
-            foreach (Token token in Program.game.player1.tokens) { }
+            foreach (Token token in Program.game.player1.tokens) 
+            {
+                DrawToken(token);
+            }
+            foreach (Token token in Program.game.player2.tokens)
+            {
+                DrawToken(token);
+            }
         }
         private void WriteScores() { }
 

@@ -179,7 +179,7 @@
             // 
             // white1
             // 
-            this.white1.BackColor = System.Drawing.Color.Bisque;
+            this.white1.BackColor = System.Drawing.Color.Transparent;
             this.white1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white1.Image = ((System.Drawing.Image)(resources.GetObject("white1.Image")));
             this.white1.Location = new System.Drawing.Point(357, 164);
@@ -191,7 +191,7 @@
             // 
             // white2
             // 
-            this.white2.BackColor = System.Drawing.Color.Bisque;
+            this.white2.BackColor = System.Drawing.Color.Transparent;
             this.white2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white2.Image = ((System.Drawing.Image)(resources.GetObject("white2.Image")));
             this.white2.Location = new System.Drawing.Point(444, 164);
@@ -203,7 +203,7 @@
             // 
             // white3
             // 
-            this.white3.BackColor = System.Drawing.Color.Bisque;
+            this.white3.BackColor = System.Drawing.Color.Transparent;
             this.white3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white3.Image = ((System.Drawing.Image)(resources.GetObject("white3.Image")));
             this.white3.Location = new System.Drawing.Point(532, 164);
@@ -215,7 +215,7 @@
             // 
             // white4
             // 
-            this.white4.BackColor = System.Drawing.Color.Bisque;
+            this.white4.BackColor = System.Drawing.Color.Transparent;
             this.white4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white4.Image = ((System.Drawing.Image)(resources.GetObject("white4.Image")));
             this.white4.Location = new System.Drawing.Point(621, 164);
@@ -227,7 +227,7 @@
             // 
             // white5
             // 
-            this.white5.BackColor = System.Drawing.Color.Bisque;
+            this.white5.BackColor = System.Drawing.Color.Transparent;
             this.white5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white5.Image = ((System.Drawing.Image)(resources.GetObject("white5.Image")));
             this.white5.Location = new System.Drawing.Point(269, 164);
@@ -239,7 +239,7 @@
             // 
             // white6
             // 
-            this.white6.BackColor = System.Drawing.Color.Bisque;
+            this.white6.BackColor = System.Drawing.Color.Transparent;
             this.white6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white6.Image = ((System.Drawing.Image)(resources.GetObject("white6.Image")));
             this.white6.Location = new System.Drawing.Point(178, 164);
@@ -251,7 +251,7 @@
             // 
             // white0
             // 
-            this.white0.BackColor = System.Drawing.Color.Bisque;
+            this.white0.BackColor = System.Drawing.Color.Transparent;
             this.white0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.white0.Image = ((System.Drawing.Image)(resources.GetObject("white0.Image")));
             this.white0.Location = new System.Drawing.Point(83, 164);
