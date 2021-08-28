@@ -39,7 +39,7 @@ namespace RoyalGameOfUr
             DrawTiles();
             DrawDice();
             DrawTokens();
-            WriteScores();
+            WriteTurn();
         }
 
         private void DrawTiles() 
@@ -60,7 +60,16 @@ namespace RoyalGameOfUr
         {
             using (Graphics g = this.CreateGraphics()) 
             {
-                int x = ClientSize.Width - 3 * size - (i % 8) * size;
+                int row = i / 8;
+                int x;
+                if (row == 1)
+                {
+                    x = ClientSize.Width - 3 * size - (7 - (i % 8)) * size;
+                }
+                else 
+                {
+                    x = ClientSize.Width - 3 * size - (i % 8) * size;
+                }
                 int y = ((i / 8) + 1) * size;
                 Rectangle rect = new Rectangle(x, y, size, size);
                 Rectangle fillRect = new Rectangle(x + 1, y + 1, size - 1, size - 1);
@@ -152,10 +161,17 @@ namespace RoyalGameOfUr
             }
             int size = ClientSize.Width / 12;
             token.image.Size = new Size((size) - 2, (size) - 2);
-            token.image.Location = new Point(
-                ClientSize.Width - 3 * size - (token.tile % 8) * size + 1,
-                ((token.tile / 8) + 1) * size + 1
-                );
+            int row = token.tile / 8;
+            int x;
+            if (row == 1)
+            {
+                x = ClientSize.Width - 3 * size - (7 - (token.tile % 8)) * size + 1;
+            }
+            else 
+            {
+                x = ClientSize.Width - 3 * size - (token.tile % 8) * size + 1;
+            }
+            token.image.Location = new Point(x,((token.tile / 8) + 1) * size + 1);
         }
         private void DrawTokens() 
         {
@@ -168,7 +184,10 @@ namespace RoyalGameOfUr
                 DrawToken(token);
             }
         }
-        private void WriteScores() { }
+        private void WriteTurn() 
+        {
+            label2.Text = "It's " + Program.game.WhoIsPlaying().name + "'s turn.";
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -184,7 +203,7 @@ namespace RoyalGameOfUr
         private void Win(Player winner) 
         {
             timer1.Stop();
-            MessageBox.Show(winner + " is the winner!");
+            MessageBox.Show(winner.name + " is the winner!");
             Menu();
         }
 
@@ -208,19 +227,39 @@ namespace RoyalGameOfUr
                     break;
                 case 2:
                     DrawDice();
-                    Program.game.phase += 1;
-                    break;
-                case 3:
-                    //let player choose token
-                    Token token = Program.game.WhoIsPlaying().ChooseToken();
-                    if (!(token is null)) 
+                    if (Program.game.Count() == 0)
+                    {
+                        Program.game.phase += 2;
+                        Program.game.turn = !Program.game.turn;
+                    }
+                    else
                     {
                         Program.game.phase += 1;
                     }
                     break;
+                case 3:
+                    //let player choose token
+                    if (!Program.game.CanPlay()) 
+                    {
+                        Program.game.phase += 1;
+                        Program.game.turn = !Program.game.turn;
+                        break;
+                    }
+                    Token token = Program.game.WhoIsPlaying().ChooseToken();
+                    if (!(token is null)) 
+                    {
+                        if (Program.game.CanMove(token)) 
+                        {
+                            if (!Program.game.Move(token)) 
+                            {
+                                Program.game.turn = !Program.game.turn;
+                            }
+                            Program.game.phase += 1;
+                        }
+                    }
+                    break;
 
                 case 4:
-                    DrawTiles();
                     DrawTokens();
                     Program.game.phase = 0;
                     break;
@@ -233,14 +272,86 @@ namespace RoyalGameOfUr
             DrawGame();
         }
 
-        private void pictureBox7_Click(object sender, EventArgs e)
+        private void TokenClicked(Token token, Player player) 
         {
-            MessageBox.Show("7 clicked.");
+            if (player is RealPlayer) 
+            {
+                if (((RealPlayer)player).waitingForClick) 
+                {
+                    ((RealPlayer)player).chosenToken = token;
+                }
+            }
         }
 
-        private void pictureBox6_Click(object sender, EventArgs e)
+        private void black0_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("6 clicked.");
+            TokenClicked(Program.game.player2.tokens[0], Program.game.player2);
         }
+        private void black1_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player2.tokens[1], Program.game.player2);
+        }
+
+        private void black2_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player2.tokens[2], Program.game.player2);
+        }
+
+        private void black3_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player2.tokens[3], Program.game.player2);
+        }
+
+        private void black4_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player2.tokens[4], Program.game.player2);
+        }
+
+        private void black5_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player2.tokens[5], Program.game.player2);
+        }
+
+        private void black6_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player2.tokens[6], Program.game.player2);
+        }
+
+        private void white0_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[0], Program.game.player1);
+        }
+
+        private void white6_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[6], Program.game.player1);
+        }
+
+        private void white5_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[5], Program.game.player1);
+        }
+
+        private void white1_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[1], Program.game.player1);
+        }
+
+        private void white2_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[2], Program.game.player1);
+        }
+
+        private void white3_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[3], Program.game.player1);
+        }
+
+        private void white4_Click(object sender, EventArgs e)
+        {
+            TokenClicked(Program.game.player1.tokens[4], Program.game.player1);
+        }
+
+
     }
 }

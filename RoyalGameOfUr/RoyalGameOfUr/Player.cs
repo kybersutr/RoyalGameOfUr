@@ -7,6 +7,7 @@ namespace RoyalGameOfUr
     abstract class Player
     {
         public List<Token> tokens;
+        public string name;
         abstract public void ThrowDice();
         abstract public Token ChooseToken();
     }

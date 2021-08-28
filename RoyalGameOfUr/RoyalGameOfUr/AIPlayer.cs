@@ -8,10 +8,11 @@ namespace RoyalGameOfUr
     {
         private int difficulty;
 
-        public AIPlayer(int difficulty, List<Token> tokens)
+        public AIPlayer(string name, int difficulty, List<Token> tokens)
         {
             this.difficulty = difficulty;
             this.tokens = tokens;
+            this.name = name;
         }
 
         public override void ThrowDice() 
