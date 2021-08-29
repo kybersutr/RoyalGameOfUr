@@ -61,6 +61,7 @@ namespace RoyalGameOfUr
             Program.game = new Game(multiplayer, difficulty);
             Program.game.CreateBoard();
             this.Hide();
+            Program.gameForm.CalculateTilePositions();
             Program.gameForm.ShowDialog();
         }
 

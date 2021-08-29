@@ -16,6 +16,14 @@ namespace RoyalGameOfUr
             this.ResizeEnd += Resized;
         }
 
+        public void CalculateTilePositions()
+        {
+            for (int i = 0; i < Program.game.board.tiles.Count; ++i)
+            {
+                Program.game.board.tiles[i].CalculatePosition(ClientSize.Width, i);
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Menu();
@@ -36,9 +44,9 @@ namespace RoyalGameOfUr
 
         public void DrawGame() 
         {
+            DrawTokens();
             DrawTiles();
             DrawDice();
-            DrawTokens();
             WriteTurn();
         }
 
@@ -47,7 +55,7 @@ namespace RoyalGameOfUr
             for (int i = 0; i < Program.game.board.tiles.Count; ++i) 
             {
                 int size = ClientSize.Width / 12;
-                DrawTile(Program.game.board.tiles[i], i, size);
+                DrawTile(Program.game.board.tiles[i]);
             }
         
         }
@@ -56,54 +64,42 @@ namespace RoyalGameOfUr
         {
             g.FillEllipse(b, new Rectangle(x - radius, y - radius, 2 * radius, 2 * radius));
         }
-        private void DrawTile(Tile tile, int i, int size) 
+        private void DrawTile(Tile tile) 
         {
             using (Graphics g = this.CreateGraphics()) 
             {
-                int row = i / 8;
-                int x;
-                if (row == 1)
-                {
-                    x = ClientSize.Width - 3 * size - (7 - (i % 8)) * size;
-                }
-                else 
-                {
-                    x = ClientSize.Width - 3 * size - (i % 8) * size;
-                }
-                int y = ((i / 8) + 1) * size;
-                Rectangle rect = new Rectangle(x, y, size, size);
-                Rectangle fillRect = new Rectangle(x + 1, y + 1, size - 1, size - 1);
+                
                 if (!(tile is StartTile | tile is EndTile))
                 {
                     using (Brush brush = new SolidBrush(Color.Bisque))
                     {
-                        g.FillRectangle(brush, fillRect);
+                        g.FillRectangle(brush, tile.fillRect);
                     }
                     using (Pen pen = new Pen(Color.Black))
                     {
-                        g.DrawRectangle(pen, rect);
+                        g.DrawRectangle(pen, tile.rect);
                     }
-                    Image rosette = Image.FromFile("rosette.png");
+                    Image rosette = Image.FromFile("rosette2.png");
 
                     if (tile is RosetteTile)
                     {
-                        g.DrawImage(rosette, fillRect);
+                        g.DrawImage(rosette, tile.fillRect);
                     }
                 }
                 if (tile is EndTile) 
                 {
                     string text1 = ((EndTile)tile).count.ToString();
-                    using (Font font1 = new Font("Arial", size/2, FontStyle.Bold, GraphicsUnit.Point))
+                    using (Font font1 = new Font("Arial", tile.fillRect.Width/2, FontStyle.Bold, GraphicsUnit.Point))
                     {
                         using (Brush brush = new SolidBrush(Control.DefaultBackColor))
                         {
-                            g.FillRectangle(brush, fillRect);
+                            g.FillRectangle(brush, tile.fillRect);
                         }
                         using (Brush brush = new SolidBrush(Color.DarkGray)) 
                         {
                             StringFormat format = new StringFormat();
                             format.Alignment = StringAlignment.Center;
-                            g.DrawString(text1, font1, brush, fillRect, format);
+                            g.DrawString(text1, font1, brush, tile.fillRect, format);
                         }
                     }
                 }
@@ -159,19 +155,9 @@ namespace RoyalGameOfUr
             {
                 token.image.BackColor = Color.Bisque;
             }
-            int size = ClientSize.Width / 12;
-            token.image.Size = new Size((size) - 2, (size) - 2);
-            int row = token.tile / 8;
-            int x;
-            if (row == 1)
-            {
-                x = ClientSize.Width - 3 * size - (7 - (token.tile % 8)) * size + 1;
-            }
-            else 
-            {
-                x = ClientSize.Width - 3 * size - (token.tile % 8) * size + 1;
-            }
-            token.image.Location = new Point(x,((token.tile / 8) + 1) * size + 1);
+            Tile tile = Program.game.board.tiles[token.tile];
+            token.image.Size = tile.fillRect.Size;
+            token.image.Location = tile.fillRect.Location;
         }
         private void DrawTokens() 
         {
@@ -215,7 +201,7 @@ namespace RoyalGameOfUr
                 DrawGame();
                 Win(winner);
             }
-
+            
             switch (Program.game.phase)
             {
                 case 0:
@@ -236,6 +222,7 @@ namespace RoyalGameOfUr
 
                 case 4:
                     DrawTokens();
+                    DrawTiles();
                     Program.game.Phase4();
                     break;
             }
@@ -244,6 +231,7 @@ namespace RoyalGameOfUr
 
         private void Resized(object sender, EventArgs e)
         {
+            CalculateTilePositions();
             DrawGame();
         }
 
