@@ -76,6 +76,53 @@ namespace RoyalGameOfUr
 
         }
 
+        public void Phase0() 
+        {
+            WhoIsPlaying().ThrowDice();
+            phase += 1;
+        }
+
+        public void Phase2() 
+        {
+            if (Count() == 0)
+            {
+                phase += 2;
+                turn = !turn;
+            }
+            else
+            {
+                phase += 1;
+            }
+        }
+
+        public void Phase3() 
+        {
+            if (!CanPlay())
+            {
+                phase += 1;
+                turn = !turn;
+            }
+            else 
+            {
+                Token token = WhoIsPlaying().ChooseToken();
+                if (!(token is null))
+                {
+                    if (CanMove(token))
+                    {
+                        if (!Move(token))
+                        {
+                            turn = !turn;
+                        }
+                        phase += 1;
+                    }
+                }
+            }
+        }
+
+        public void Phase4() 
+        {
+            phase = 0;
+        }
         public bool CanPlay() 
         {
             Player player = WhoIsPlaying();
@@ -93,6 +140,11 @@ namespace RoyalGameOfUr
         public bool CanMove(Token token) 
         {
             int count = Count();
+            if (!token.image.Visible) 
+            {
+                return false;
+            }
+
             if (player1.tokens.Contains(token))
             {
                 if (token.tile == 15 | token.tile < 3)

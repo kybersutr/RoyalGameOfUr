@@ -212,6 +212,7 @@ namespace RoyalGameOfUr
             Player winner = Program.game.CheckWinner();
             if (!(winner is null))
             {
+                DrawGame();
                 Win(winner);
             }
 
@@ -219,49 +220,23 @@ namespace RoyalGameOfUr
             {
                 case 0:
                     DrawGame();
-                    Program.game.WhoIsPlaying().ThrowDice();
-                    Program.game.phase += 1;
+                    Program.game.Phase0();
                     break;
                 case 1:
                     // Waiting for player to throw dice
                     break;
                 case 2:
                     DrawDice();
-                    if (Program.game.Count() == 0)
-                    {
-                        Program.game.phase += 2;
-                        Program.game.turn = !Program.game.turn;
-                    }
-                    else
-                    {
-                        Program.game.phase += 1;
-                    }
+                    Program.game.Phase2();
                     break;
                 case 3:
                     //let player choose token
-                    if (!Program.game.CanPlay()) 
-                    {
-                        Program.game.phase += 1;
-                        Program.game.turn = !Program.game.turn;
-                        break;
-                    }
-                    Token token = Program.game.WhoIsPlaying().ChooseToken();
-                    if (!(token is null)) 
-                    {
-                        if (Program.game.CanMove(token)) 
-                        {
-                            if (!Program.game.Move(token)) 
-                            {
-                                Program.game.turn = !Program.game.turn;
-                            }
-                            Program.game.phase += 1;
-                        }
-                    }
+                    Program.game.Phase3();
                     break;
 
                 case 4:
                     DrawTokens();
-                    Program.game.phase = 0;
+                    Program.game.Phase4();
                     break;
             }
 

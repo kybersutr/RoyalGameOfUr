@@ -21,10 +21,25 @@ namespace RoyalGameOfUr
             {
                 dice.Throw();
             }
+            Program.game.phase += 1;
         }
         public override Token ChooseToken() 
         {
-            return tokens[0];
+            if (difficulty == 0)
+            {
+                foreach (Token token in tokens)
+                {
+                    if (Program.game.CanMove(token))
+                    {
+                        return token;
+                    }
+                }
+                return null;
+            }
+            else 
+            {
+                return tokens[0];
+            }
         }
     }
 }
