@@ -27,19 +27,50 @@ namespace RoyalGameOfUr
         {
             if (difficulty == 0)
             {
-                foreach (Token token in tokens)
-                {
-                    if (Program.game.CanMove(token))
-                    {
-                        return token;
-                    }
-                }
-                return null;
+                return Easy();
+            }
+            else if (difficulty == 1)
+            {
+                return Medium();
             }
             else 
             {
-                return tokens[0];
+                return Hard();
             }
+        }
+
+        private Token Easy() 
+        {
+            // Returns the first possible token
+            foreach (Token token in tokens)
+            {
+                if (Program.game.CanMove(token))
+                {
+                    return token;
+                }
+            }
+            return null;
+        }
+
+        private Token Medium() 
+        {
+            // Try to move each token and see where it landed. Choose the token with the best result.
+            // Best results: lands on a rosette, gets off the board, overthrows other player
+            Token bestToken = Easy();
+            foreach (Token token in tokens) 
+            {
+                if (!Program.game.CanMove(token)) 
+                {
+                    continue;
+                }
+
+            }
+            return bestToken;
+        }
+
+        private Token Hard() 
+        {
+            return null;
         }
     }
 }

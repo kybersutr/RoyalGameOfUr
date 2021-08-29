@@ -262,6 +262,78 @@ namespace RoyalGameOfUr
             }
 
         }
+
+        public bool ReversableMove(Token token)
+        {
+            // Works like Move but returns the game status before the move was made.
+            int count = Program.game.Count();
+
+            board.tiles[token.tile].occupiedBy = null;
+
+            if (player1.tokens.Contains(token))
+            {
+                token.tile = (token.tile + count) % 16;
+
+                if (board.tiles[token.tile] is EndTile)
+                {
+                    ((EndTile)board.tiles[token.tile]).count += 1;
+                    token.image.Visible = false;
+                }
+                else
+                {
+                    if (board.tiles[token.tile].occupiedBy == player2)
+                    {
+                        foreach (Token otherToken in player2.tokens)
+                        {
+                            if (otherToken.tile == token.tile)
+                            {
+                                otherToken.tile = 19;
+                            }
+                        }
+                    }
+                    board.tiles[token.tile].occupiedBy = player1;
+                }
+            }
+            else
+            {
+                if (token.tile + count <= 23)
+                {
+                    token.tile += count;
+                }
+                else
+                {
+                    token.tile = ((token.tile + count) % 24) + 8;
+                }
+                if (board.tiles[token.tile] is EndTile)
+                {
+                    ((EndTile)board.tiles[token.tile]).count += 1;
+                    token.image.Visible = false;
+                }
+                else
+                {
+                    if (board.tiles[token.tile].occupiedBy == player1)
+                    {
+                        foreach (Token otherToken in player1.tokens)
+                        {
+                            if (otherToken.tile == token.tile)
+                            {
+                                otherToken.tile = 3;
+                            }
+                        }
+                    }
+                    board.tiles[token.tile].occupiedBy = player2;
+                }
+            }
+            if (board.tiles[token.tile] is RosetteTile)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         public int Count() 
         {
             int count = 0;
