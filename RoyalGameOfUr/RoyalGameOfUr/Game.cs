@@ -97,7 +97,7 @@ namespace RoyalGameOfUr
 
         public void Phase3() 
         {
-            if (!CanPlay())
+            if (!CanPlay(WhoIsPlaying()))
             {
                 phase += 1;
                 turn = !turn;
@@ -123,9 +123,8 @@ namespace RoyalGameOfUr
         {
             phase = 0;
         }
-        public bool CanPlay() 
+        public bool CanPlay(Player player) 
         {
-            Player player = WhoIsPlaying();
             bool canPlay = false;
             foreach (Token token in player.tokens) 
             {
@@ -292,7 +291,7 @@ namespace RoyalGameOfUr
                 }
                 else if (tile is StartTile) 
                 {
-                    rating -= 1;
+                    rating -= 2;
                 }
             }
             foreach (Token token in player2.tokens) 
@@ -308,7 +307,7 @@ namespace RoyalGameOfUr
                 }
                 else if (tile is StartTile)
                 {
-                    rating += 1;
+                    rating += 2;
                 }
             }
             return rating;
@@ -316,14 +315,13 @@ namespace RoyalGameOfUr
 
         public void Reverse(int[] previousP1, int[] previousP2) 
         {
-            for (int i = 0; i < previousP1.Length; ++i) 
+            for (int i = 0; i < previousP1.Length; ++i)
             {
                 board.tiles[player1.tokens[i].tile].occupiedBy = null;
                 board.tiles[player2.tokens[i].tile].occupiedBy = null;
-
-                if ((board.tiles[player1.tokens[i].tile] is EndTile) & !(board.tiles[previousP1[i]] is EndTile)) 
+                if ((board.tiles[player1.tokens[i].tile] is EndTile) & !(board.tiles[previousP1[i]] is EndTile))
                 {
-                    ((EndTile)board.tiles[player2.tokens[i].tile]).count -= 1;
+                    ((EndTile)board.tiles[player1.tokens[i].tile]).count -= 1;
                     player1.tokens[i].image.Visible = true;
                 }
                 if (board.tiles[player2.tokens[i].tile] is EndTile & !(board.tiles[previousP2[i]] is EndTile))
@@ -331,13 +329,22 @@ namespace RoyalGameOfUr
                     ((EndTile)board.tiles[player2.tokens[i].tile]).count -= 1;
                     player2.tokens[i].image.Visible = true;
                 }
-
+            }
+            for (int i = 0; i < previousP1.Length; ++i)
+            {
 
                 player1.tokens[i].tile = previousP1[i];
                 player2.tokens[i].tile = previousP2[i];
 
-                board.tiles[player1.tokens[i].tile].occupiedBy = player1;
-                board.tiles[player2.tokens[i].tile].occupiedBy = player2;
+                if (!(board.tiles[player1.tokens[i].tile] is EmptyTile))
+                {
+                    board.tiles[player1.tokens[i].tile].occupiedBy = player1;
+                }
+
+                if (!(board.tiles[player2.tokens[i].tile] is EmptyTile))
+                {
+                    board.tiles[player2.tokens[i].tile].occupiedBy = player2;
+                }
             }
         }
         public (int[], int[]) ReversibleMove(Token token, int diceCount)

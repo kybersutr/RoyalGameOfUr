@@ -83,14 +83,14 @@ namespace RoyalGameOfUr
 
         private Token Hard() 
         {
-            int depth = 0;
+            int depth = 2;
             (Token bestToken, _) = Expectiminimax(depth, this, Program.game.DiceCount());
             return bestToken;
         }
 
         private (Token, double) Expectiminimax(int depth, Player player, int diceCount) 
         {
-            Token bestToken = null;
+            Token bestToken = Medium();
             double bestValue;
             Player opponent;
 
@@ -103,6 +103,10 @@ namespace RoyalGameOfUr
             {
                 opponent = Program.game.player1;
                 bestValue = double.PositiveInfinity;
+            }
+            if (!(Program.game.CanPlay(player))) 
+            {
+                return (null, bestValue);
             }
             if (depth == 0)
             {
@@ -152,11 +156,11 @@ namespace RoyalGameOfUr
                         (_, double threeThrow) = Expectiminimax(depth - 1, player, 3);
                         (_, double fourThrow) = Expectiminimax(depth - 1, player, 4);
                         currentValue += 
-                              (1 / 16) * zeroThrow 
-                            + (4 / 16) * oneThrow 
-                            + (6 / 16) * twoThrow 
-                            + (4 / 16) * threeThrow 
-                            + (1 / 16) * fourThrow;
+                              (1 / 16.0) * zeroThrow 
+                            + (4 / 16.0) * oneThrow 
+                            + (6 / 16.0) * twoThrow 
+                            + (4 / 16.0) * threeThrow 
+                            + (1 / 16.0) * fourThrow;
                     }
                     else 
                     {
@@ -166,11 +170,11 @@ namespace RoyalGameOfUr
                         (_, double threeThrow) = Expectiminimax(depth - 1, opponent, 3);
                         (_, double fourThrow) = Expectiminimax(depth - 1, opponent, 4);
                         currentValue +=
-                              (1 / 16) * zeroThrow
-                            + (4 / 16) * oneThrow
-                            + (6 / 16) * twoThrow
-                            + (4 / 16) * threeThrow
-                            + (1 / 16) * fourThrow;
+                              (1 / 16.0) * zeroThrow
+                            + (4 / 16.0) * oneThrow
+                            + (6 / 16.0) * twoThrow
+                            + (4 / 16.0) * threeThrow
+                            + (1 / 16.0) * fourThrow;
                     }
                     Program.game.Reverse(previousP1, previousP2);
                     if (player == Program.game.player1)
@@ -191,7 +195,12 @@ namespace RoyalGameOfUr
                     }
                 }
             }
+            if (depth == 2) 
+            {
+                //idk stg
+            }
             return (bestToken, bestValue);
+
         }
     }
 }
