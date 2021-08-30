@@ -67,6 +67,7 @@ namespace RoyalGameOfUr
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Process.Start(new ProcessStartInfo {FileName = "notepad", Arguments = "rules.txt"});
         }
     }
 }

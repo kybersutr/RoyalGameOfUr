@@ -1,0 +1,8 @@
+Rules of the game
+The Royal game of Ur is a race board game for two players. It is played on a board consisting of 20 squares, four four-sided dice and seven tokens for each player. The goal of the game is to get your own tokens to the end of the board sooner than your opponent.
+
+The players take turns throwing the dice. Each dice has two of its vertices marked with a dot. The sum of the dots on all the dice thrown is the number of squares the player has to move along the given path (a number between 0 and 4; 0 means the player loses their turn). However, the player can choose which of their tokens to move, which adds a strategic aspect to the game. 
+
+If the player moves their token on a space with their opponent’s token, they capture it and this token has to make its journey again from the start. When the token lands on a square marked with a rosette, it is safe from capture (that means the opponent cannot land on this space even if he throws the right number). Also, the player who landed on it gets one extra turn.
+
+To move your piece out of the board, you have to roll the exact number (e.g. if your token stands right next to the end and you throw anything other than 1, you cannot move this token). Whoever gets all 7 of their tokens out of the board first, wins.
