@@ -191,17 +191,35 @@ namespace RoyalGameOfUr
             return true;
         }
 
-        public bool Move(Token token) 
+        public int GetNewTile(Token token) 
         {
-            // True if player plays again (lands on rosette)
             int count = Program.game.DiceCount();
-
-            board.tiles[token.tile].occupiedBy = null;
 
             if (player1.tokens.Contains(token))
             {
-                token.tile = (token.tile + count) % 16;
-                
+                return (token.tile + count) % 16;
+
+            }
+            else
+            {
+                if (token.tile + count <= 23)
+                {
+                    return token.tile + count;
+                }
+                else
+                {
+                    return ((token.tile + count) % 24) + 8;
+                }
+            }
+        }
+        public bool Move(Token token) 
+        {
+            // True if player plays again (lands on rosette)
+            board.tiles[token.tile].occupiedBy = null;
+            token.tile = GetNewTile(token);
+
+            if (player1.tokens.Contains(token))
+            {                
                 if (board.tiles[token.tile] is EndTile)
                 {
                     ((EndTile)board.tiles[token.tile]).count += 1;
@@ -225,14 +243,6 @@ namespace RoyalGameOfUr
             }
             else 
             {
-                if (token.tile + count <= 23)
-                {
-                    token.tile += count;
-                }
-                else 
-                {
-                    token.tile = ((token.tile + count) % 24) + 8; 
-                }
                 if (board.tiles[token.tile] is EndTile)
                 {
                     ((EndTile)board.tiles[token.tile]).count += 1;

@@ -58,14 +58,11 @@ namespace RoyalGameOfUr
             // Best results: lands on a rosette, gets off the board, overthrows other player
             foreach (Token token in tokens) 
             {
-                int count = Program.game.DiceCount();
                 if (!Program.game.CanMove(token)) 
                 {
                     continue;
                 }
-                (int[] previousP1, int[] previousP2) = Program.game.ReversibleMove(token);
-                int newTile = token.tile;
-                Program.game.Reverse(previousP1, previousP2);
+                int newTile = Program.game.GetNewTile(token);
                 if (Program.game.board.tiles[newTile] is RosetteTile)
                 {
                     return token;
