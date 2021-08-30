@@ -344,7 +344,6 @@
 
         private System.Windows.Forms.Button button1;
         public System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Timer timer1;
         public System.Windows.Forms.PictureBox black1;
         public System.Windows.Forms.PictureBox black2;
         public System.Windows.Forms.PictureBox black3;
@@ -361,5 +360,6 @@
         public System.Windows.Forms.PictureBox white0;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Timer timer1;
     }
 }

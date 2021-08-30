@@ -84,7 +84,7 @@ namespace RoyalGameOfUr
 
         public void Phase2() 
         {
-            if (Count() == 0)
+            if (DiceCount() == 0)
             {
                 phase += 2;
                 turn = !turn;
@@ -139,7 +139,7 @@ namespace RoyalGameOfUr
         }
         public bool CanMove(Token token) 
         {
-            int count = Count();
+            int count = DiceCount();
             if (!token.image.Visible) 
             {
                 return false;
@@ -194,7 +194,7 @@ namespace RoyalGameOfUr
         public bool Move(Token token) 
         {
             // True if player plays again (lands on rosette)
-            int count = Program.game.Count();
+            int count = Program.game.DiceCount();
 
             board.tiles[token.tile].occupiedBy = null;
 
@@ -205,6 +205,7 @@ namespace RoyalGameOfUr
                 if (board.tiles[token.tile] is EndTile)
                 {
                     ((EndTile)board.tiles[token.tile]).count += 1;
+                    board.tiles[token.tile].occupiedBy = null;
                     token.image.Visible = false;
                 }
                 else 
@@ -236,6 +237,7 @@ namespace RoyalGameOfUr
                 {
                     ((EndTile)board.tiles[token.tile]).count += 1;
                     token.image.Visible = false;
+                    board.tiles[token.tile].occupiedBy = null;
                 }
                 else 
                 {
@@ -263,78 +265,49 @@ namespace RoyalGameOfUr
 
         }
 
-        public bool ReversableMove(Token token)
+        public void Reverse(int[] previousP1, int[] previousP2) 
+        {
+            for (int i = 0; i < previousP1.Length; ++i) 
+            {
+                board.tiles[player1.tokens[i].tile].occupiedBy = null;
+                board.tiles[player2.tokens[i].tile].occupiedBy = null;
+
+                if ((board.tiles[player1.tokens[i].tile] is EndTile) & !(board.tiles[previousP1[i]] is EndTile)) 
+                {
+                    ((EndTile)board.tiles[player2.tokens[i].tile]).count -= 1;
+                    player1.tokens[i].image.Visible = true;
+                }
+                if (board.tiles[player2.tokens[i].tile] is EndTile & !(board.tiles[previousP2[i]] is EndTile))
+                {
+                    ((EndTile)board.tiles[player2.tokens[i].tile]).count -= 1;
+                    player2.tokens[i].image.Visible = true;
+                }
+
+
+                player1.tokens[i].tile = previousP1[i];
+
+                player2.tokens[i].tile = previousP2[i];
+
+                board.tiles[player1.tokens[i].tile].occupiedBy = player1;
+                board.tiles[player2.tokens[i].tile].occupiedBy = player2;
+            }
+        }
+        public (int[], int[]) ReversibleMove(Token token)
         {
             // Works like Move but returns the game status before the move was made.
-            int count = Program.game.Count();
+            int[] previousP1 = new int[player1.tokens.Count];
+            int[] previousP2 = new int[player2.tokens.Count];
 
-            board.tiles[token.tile].occupiedBy = null;
-
-            if (player1.tokens.Contains(token))
+            for (int i = 0; i < player1.tokens.Count; ++i) 
             {
-                token.tile = (token.tile + count) % 16;
-
-                if (board.tiles[token.tile] is EndTile)
-                {
-                    ((EndTile)board.tiles[token.tile]).count += 1;
-                    token.image.Visible = false;
-                }
-                else
-                {
-                    if (board.tiles[token.tile].occupiedBy == player2)
-                    {
-                        foreach (Token otherToken in player2.tokens)
-                        {
-                            if (otherToken.tile == token.tile)
-                            {
-                                otherToken.tile = 19;
-                            }
-                        }
-                    }
-                    board.tiles[token.tile].occupiedBy = player1;
-                }
+                previousP1[i] = player1.tokens[i].tile;
+                previousP2[i] = player2.tokens[i].tile;
             }
-            else
-            {
-                if (token.tile + count <= 23)
-                {
-                    token.tile += count;
-                }
-                else
-                {
-                    token.tile = ((token.tile + count) % 24) + 8;
-                }
-                if (board.tiles[token.tile] is EndTile)
-                {
-                    ((EndTile)board.tiles[token.tile]).count += 1;
-                    token.image.Visible = false;
-                }
-                else
-                {
-                    if (board.tiles[token.tile].occupiedBy == player1)
-                    {
-                        foreach (Token otherToken in player1.tokens)
-                        {
-                            if (otherToken.tile == token.tile)
-                            {
-                                otherToken.tile = 3;
-                            }
-                        }
-                    }
-                    board.tiles[token.tile].occupiedBy = player2;
-                }
-            }
-            if (board.tiles[token.tile] is RosetteTile)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Move(token);
+            return (previousP1, previousP2);
 
         }
-        public int Count() 
+        public int DiceCount() 
         {
             int count = 0;
             foreach (Dice dice in board.dice) 

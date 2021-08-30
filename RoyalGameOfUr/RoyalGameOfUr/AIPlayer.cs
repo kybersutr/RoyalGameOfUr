@@ -56,16 +56,32 @@ namespace RoyalGameOfUr
         {
             // Try to move each token and see where it landed. Choose the token with the best result.
             // Best results: lands on a rosette, gets off the board, overthrows other player
-            Token bestToken = Easy();
             foreach (Token token in tokens) 
             {
+                int count = Program.game.DiceCount();
                 if (!Program.game.CanMove(token)) 
                 {
                     continue;
                 }
+                (int[] previousP1, int[] previousP2) = Program.game.ReversibleMove(token);
+                int newTile = token.tile;
+                Program.game.Reverse(previousP1, previousP2);
+                if (Program.game.board.tiles[newTile] is RosetteTile)
+                {
+                    return token;
+                }
+                else if (Program.game.board.tiles[newTile] is EndTile) 
+                {
+                    return token;
+                }
+                if ((Program.game.board.tiles[newTile].occupiedBy != this)
+                    & !(Program.game.board.tiles[newTile].occupiedBy is null)) 
+                {
+                    return token;
+                }
 
             }
-            return bestToken;
+            return Easy();
         }
 
         private Token Hard() 

@@ -212,7 +212,15 @@ namespace RoyalGameOfUr
                     // Waiting for player to throw dice
                     break;
                 case 2:
-                    DrawDice();
+                    for (int i = 0; i < 50; ++i) 
+                    {
+                        // Dice throw animation
+                        foreach (Dice dice in Program.game.board.dice) 
+                        {
+                            dice.Throw();
+                        }
+                        DrawDice();
+                    }
                     Program.game.Phase2();
                     break;
                 case 3:
