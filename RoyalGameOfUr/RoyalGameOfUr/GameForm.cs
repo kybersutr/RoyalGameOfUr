@@ -125,12 +125,18 @@ namespace RoyalGameOfUr
                 {
                     g.FillPolygon(brush, triangle);
                 }
+                using (Pen pen = new Pen(Color.Gray)) 
+                {
+                    g.DrawLine(pen, new Point(mid, top + (2 * (bot - top) / 3)), triangle[0]);
+                    g.DrawLine(pen, new Point(mid, top + (2 * (bot - top) / 3)), triangle[1]);
+                    g.DrawLine(pen, new Point(mid, top + (2 * (bot - top) / 3)), triangle[2]);
+                }
                 if (dice.dot)
                 {
-                    int radius = size / 8;
+                    int radius = size / 11;
                     using (Brush brush = new SolidBrush(Color.White))
                     {
-                        FillCircle(g, brush, mid, top + 2*(bot - top)/3, radius);
+                        FillCircle(g, brush, mid, top + 2 * (bot - top) / 3, radius);
                     }
                 }
             }

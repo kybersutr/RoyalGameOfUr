@@ -195,10 +195,6 @@ namespace RoyalGameOfUr
                     }
                 }
             }
-            if (depth == 2) 
-            {
-                //idk stg
-            }
             return (bestToken, bestValue);
 
         }
