@@ -62,7 +62,7 @@ namespace RoyalGameOfUr
                 {
                     continue;
                 }
-                int newTile = Program.game.GetNewTile(token);
+                int newTile = Program.game.GetNewTile(token, Program.game.DiceCount());
                 if (Program.game.board.tiles[newTile] is RosetteTile)
                 {
                     return token;
@@ -83,7 +83,115 @@ namespace RoyalGameOfUr
 
         private Token Hard() 
         {
-            return null;
+            int depth = 0;
+            (Token bestToken, _) = Expectiminimax(depth, this, Program.game.DiceCount());
+            return bestToken;
+        }
+
+        private (Token, double) Expectiminimax(int depth, Player player, int diceCount) 
+        {
+            Token bestToken = null;
+            double bestValue;
+            Player opponent;
+
+            if (player == Program.game.player1)
+            {
+                opponent = Program.game.player2;
+                bestValue = double.NegativeInfinity;
+            }
+            else 
+            {
+                opponent = Program.game.player1;
+                bestValue = double.PositiveInfinity;
+            }
+            if (depth == 0)
+            {
+                foreach (Token token in player.tokens) 
+                {
+                    if (!(Program.game.CanMove(token))) 
+                    {
+                        continue;
+                    }
+                    (int[] previousP1, int[] previousP2) = Program.game.ReversibleMove(token, diceCount);
+                    double currentValue = Program.game.RatePosition();
+                    Program.game.Reverse(previousP1, previousP2);
+
+                    if (player == Program.game.player1)
+                    {
+                        if (currentValue > bestValue)
+                        {
+                            bestValue = currentValue;
+                            bestToken = token;
+                        }
+                    }
+                    else 
+                    {
+                        if (currentValue < bestValue) 
+                        {
+                            bestValue = currentValue;
+                            bestToken = token;
+                        }
+                    }
+                }
+            }
+            else 
+            {
+                double currentValue = 0;
+                foreach (Token token in player.tokens) 
+                {
+                    if (!(Program.game.CanMove(token))) 
+                    {
+                        continue;
+                    }
+                    (int[] previousP1, int[]previousP2) = Program.game.ReversibleMove(token, diceCount);
+                    if (Program.game.board.tiles[token.tile] is RosetteTile)
+                    {
+                        (_, double zeroThrow) = Expectiminimax(depth - 1, player, 0);
+                        (_, double oneThrow) = Expectiminimax(depth - 1, player, 1);
+                        (_, double twoThrow) = Expectiminimax(depth - 1, player, 2);
+                        (_, double threeThrow) = Expectiminimax(depth - 1, player, 3);
+                        (_, double fourThrow) = Expectiminimax(depth - 1, player, 4);
+                        currentValue += 
+                              (1 / 16) * zeroThrow 
+                            + (4 / 16) * oneThrow 
+                            + (6 / 16) * twoThrow 
+                            + (4 / 16) * threeThrow 
+                            + (1 / 16) * fourThrow;
+                    }
+                    else 
+                    {
+                        (_, double zeroThrow) = Expectiminimax(depth - 1, opponent, 0);
+                        (_, double oneThrow) = Expectiminimax(depth - 1, opponent, 1);
+                        (_, double twoThrow) = Expectiminimax(depth - 1, opponent, 2);
+                        (_, double threeThrow) = Expectiminimax(depth - 1, opponent, 3);
+                        (_, double fourThrow) = Expectiminimax(depth - 1, opponent, 4);
+                        currentValue +=
+                              (1 / 16) * zeroThrow
+                            + (4 / 16) * oneThrow
+                            + (6 / 16) * twoThrow
+                            + (4 / 16) * threeThrow
+                            + (1 / 16) * fourThrow;
+                    }
+                    Program.game.Reverse(previousP1, previousP2);
+                    if (player == Program.game.player1)
+                    {
+                        if (currentValue > bestValue)
+                        {
+                            bestValue = currentValue;
+                            bestToken = token;
+                        }
+                    }
+                    else 
+                    {
+                        if (currentValue < bestValue) 
+                        {
+                            bestValue = currentValue;
+                            bestToken = token;
+                        }
+                    }
+                }
+            }
+            return (bestToken, bestValue);
         }
     }
 }

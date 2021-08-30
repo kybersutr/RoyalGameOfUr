@@ -109,7 +109,7 @@ namespace RoyalGameOfUr
                 {
                     if (CanMove(token))
                     {
-                        if (!Move(token))
+                        if (!Move(token, DiceCount()))
                         {
                             turn = !turn;
                         }
@@ -191,32 +191,30 @@ namespace RoyalGameOfUr
             return true;
         }
 
-        public int GetNewTile(Token token) 
+        public int GetNewTile(Token token, int diceCount) 
         {
-            int count = Program.game.DiceCount();
-
             if (player1.tokens.Contains(token))
             {
-                return (token.tile + count) % 16;
+                return (token.tile + diceCount) % 16;
 
             }
             else
             {
-                if (token.tile + count <= 23)
+                if (token.tile + diceCount <= 23)
                 {
-                    return token.tile + count;
+                    return token.tile + diceCount;
                 }
                 else
                 {
-                    return ((token.tile + count) % 24) + 8;
+                    return ((token.tile + diceCount) % 24) + 8;
                 }
             }
         }
-        public bool Move(Token token) 
+        public bool Move(Token token, int diceCount) 
         {
             // True if player plays again (lands on rosette)
             board.tiles[token.tile].occupiedBy = null;
-            token.tile = GetNewTile(token);
+            token.tile = GetNewTile(token, diceCount);
 
             if (player1.tokens.Contains(token))
             {                
@@ -275,6 +273,47 @@ namespace RoyalGameOfUr
 
         }
 
+        public int RatePosition() 
+        {
+            // + points for tokens on the end tile and on the rosette stones, 
+            // - points for tokens still at the start (should encourage overthrowing oponent tokens)
+            // white +, black -
+            int rating = 0;
+            foreach (Token token in player1.tokens) 
+            {
+                Tile tile = board.tiles[token.tile];
+                if (tile is EndTile)
+                {
+                    rating += 3;
+                }
+                else if (tile is RosetteTile)
+                {
+                    rating += 1;
+                }
+                else if (tile is StartTile) 
+                {
+                    rating -= 1;
+                }
+            }
+            foreach (Token token in player2.tokens) 
+            {
+                Tile tile = board.tiles[token.tile];
+                if (tile is EndTile)
+                {
+                    rating -= 3;
+                }
+                else if (tile is RosetteTile)
+                {
+                    rating -= 1;
+                }
+                else if (tile is StartTile)
+                {
+                    rating += 1;
+                }
+            }
+            return rating;
+        }
+
         public void Reverse(int[] previousP1, int[] previousP2) 
         {
             for (int i = 0; i < previousP1.Length; ++i) 
@@ -295,14 +334,13 @@ namespace RoyalGameOfUr
 
 
                 player1.tokens[i].tile = previousP1[i];
-
                 player2.tokens[i].tile = previousP2[i];
 
                 board.tiles[player1.tokens[i].tile].occupiedBy = player1;
                 board.tiles[player2.tokens[i].tile].occupiedBy = player2;
             }
         }
-        public (int[], int[]) ReversibleMove(Token token)
+        public (int[], int[]) ReversibleMove(Token token, int diceCount)
         {
             // Works like Move but returns the game status before the move was made.
             int[] previousP1 = new int[player1.tokens.Count];
@@ -313,7 +351,7 @@ namespace RoyalGameOfUr
                 previousP1[i] = player1.tokens[i].tile;
                 previousP2[i] = player2.tokens[i].tile;
             }
-            Move(token);
+            Move(token, diceCount);
             return (previousP1, previousP2);
 
         }
