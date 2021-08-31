@@ -106,7 +106,7 @@ namespace RoyalGameOfUr
             }
             if (!(Program.game.CanPlay(player))) 
             {
-                return (null, bestValue);
+                return (null, Program.game.RatePosition());
             }
             if (depth == 0)
             {
