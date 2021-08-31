@@ -44,7 +44,7 @@ namespace RoyalGameOfUr
             // Returns the first possible token
             foreach (Token token in tokens)
             {
-                if (Program.game.CanMove(token))
+                if (Program.game.CanMove(token, Program.game.DiceCount()))
                 {
                     return token;
                 }
@@ -58,7 +58,7 @@ namespace RoyalGameOfUr
             // Best results: lands on a rosette, gets off the board, overthrows other player
             foreach (Token token in tokens) 
             {
-                if (!Program.game.CanMove(token)) 
+                if (!Program.game.CanMove(token, Program.game.DiceCount())) 
                 {
                     continue;
                 }
@@ -83,6 +83,7 @@ namespace RoyalGameOfUr
 
         private Token Hard() 
         {
+            // Uses Expectiminimax and rates situation depth+1 moves in the future
             int depth = 2;
             (Token bestToken, _) = Expectiminimax(depth, this, Program.game.DiceCount());
             return bestToken;
@@ -104,15 +105,19 @@ namespace RoyalGameOfUr
                 opponent = Program.game.player1;
                 bestValue = double.PositiveInfinity;
             }
-            if (!(Program.game.CanPlay(player))) 
+
+            if (!(Program.game.CanPlay(player, diceCount))) 
             {
+                //shouldn't happen, CanPlay is checked before
                 return (null, Program.game.RatePosition());
             }
+
             if (depth == 0)
             {
+                // Tries to play every token and rates the new position with RatePosition() Game method
                 foreach (Token token in player.tokens) 
                 {
-                    if (!(Program.game.CanMove(token))) 
+                    if (!(Program.game.CanMove(token, diceCount))) 
                     {
                         continue;
                     }
@@ -120,6 +125,7 @@ namespace RoyalGameOfUr
                     double currentValue = Program.game.RatePosition();
                     Program.game.Reverse(previousP1, previousP2);
 
+                    // Chooses minimal/maximal value
                     if (player == Program.game.player1)
                     {
                         if (currentValue > bestValue)
@@ -138,12 +144,15 @@ namespace RoyalGameOfUr
                     }
                 }
             }
+
             else 
             {
                 double currentValue = 0;
+
+                // make a move then run Expectiminimax on each possible dice throw and take the weighted average of the results
                 foreach (Token token in player.tokens) 
                 {
-                    if (!(Program.game.CanMove(token))) 
+                    if (!(Program.game.CanMove(token, diceCount))) 
                     {
                         continue;
                     }
@@ -177,6 +186,8 @@ namespace RoyalGameOfUr
                             + (1 / 16.0) * fourThrow;
                     }
                     Program.game.Reverse(previousP1, previousP2);
+
+                    // save minimal/maximal value
                     if (player == Program.game.player1)
                     {
                         if (currentValue > bestValue)

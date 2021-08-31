@@ -294,7 +294,7 @@
             this.label2.Font = new System.Drawing.Font("Felix Titling", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(12, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(326, 40);
+            this.label2.Size = new System.Drawing.Size(318, 39);
             this.label2.TabIndex = 4;
             this.label2.Text = "It\'s White\'s turn.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

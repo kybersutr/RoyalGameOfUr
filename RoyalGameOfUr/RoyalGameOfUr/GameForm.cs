@@ -73,19 +73,22 @@ namespace RoyalGameOfUr
                 {
                     using (Brush brush = new SolidBrush(Color.Bisque))
                     {
+                        // inside color
                         g.FillRectangle(brush, tile.fillRect);
                     }
                     using (Pen pen = new Pen(Color.Black))
                     {
+                        // edges
                         g.DrawRectangle(pen, tile.rect);
                     }
-                    Image rosette = Image.FromFile("rosette2.png");
 
+                    Image rosette = Image.FromFile("rosette2.png");
                     if (tile is RosetteTile)
                     {
                         g.DrawImage(rosette, tile.fillRect);
                     }
                 }
+                
                 if (tile is EndTile) 
                 {
                     string text1 = ((EndTile)tile).count.ToString();
@@ -115,22 +118,26 @@ namespace RoyalGameOfUr
                 int left = ClientSize.Width / 2 - 2 * size + i * size;
                 int right = ClientSize.Width / 2 - size + i * size;
                 int mid = (left + right) / 2;
+                
                 Point[] triangle =
                 {
                     new Point(mid, top),
                     new Point(left, bot),
                     new Point(right, bot),
                 };
+                
                 using (Brush brush = new SolidBrush(Color.Black))
                 {
                     g.FillPolygon(brush, triangle);
                 }
+                
                 using (Pen pen = new Pen(Color.Gray)) 
                 {
                     g.DrawLine(pen, new Point(mid, top + (2 * (bot - top) / 3)), triangle[0]);
                     g.DrawLine(pen, new Point(mid, top + (2 * (bot - top) / 3)), triangle[1]);
                     g.DrawLine(pen, new Point(mid, top + (2 * (bot - top) / 3)), triangle[2]);
                 }
+                
                 if (dice.dot)
                 {
                     int radius = size / 11;
@@ -211,6 +218,7 @@ namespace RoyalGameOfUr
             switch (Program.game.phase)
             {
                 case 0:
+                    // Let player throw dice
                     DrawGame();
                     Program.game.Phase0();
                     break;
@@ -227,16 +235,18 @@ namespace RoyalGameOfUr
                         }
                         DrawDice();
                     }
+                    // Check if throw wasn't zero
                     Program.game.Phase2();
                     break;
                 case 3:
                     //let player choose token
-                    Program.game.Phase3();
+                    Program.game.Phase3(Program.game.DiceCount());
                     break;
 
                 case 4:
                     DrawTokens();
                     DrawTiles();
+                    // Return to phase 0
                     Program.game.Phase4();
                     break;
             }
@@ -251,6 +261,7 @@ namespace RoyalGameOfUr
 
         private void TokenClicked(Token token, Player player) 
         {
+            // If player is waitingForClick, pass the token as the chosenToken
             if (player is RealPlayer) 
             {
                 if (((RealPlayer)player).waitingForClick) 

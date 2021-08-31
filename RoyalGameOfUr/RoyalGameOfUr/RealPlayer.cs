@@ -16,10 +16,13 @@ namespace RoyalGameOfUr
 
         public override void ThrowDice()
         {
+            // Makes the "Throw" button visible; game then waits for the user to press the button
             Program.gameForm.button2.Visible = true;
-
         }
         public override Token ChooseToken() {
+            // Changes state to waitingForClick, 
+            // then waits until player clicks on an available token which is saved to "chosenToken"
+            // if "chosenToken" contains a token, it can be returned
             if (!waitingForClick)
             {
                 waitingForClick = true;

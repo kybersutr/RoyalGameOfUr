@@ -78,12 +78,14 @@ namespace RoyalGameOfUr
 
         public void Phase0() 
         {
+            // Let player throw dice
             WhoIsPlaying().ThrowDice();
             phase += 1;
         }
 
         public void Phase2() 
         {
+            // Check if count wasn't zero
             if (DiceCount() == 0)
             {
                 phase += 2;
@@ -95,9 +97,10 @@ namespace RoyalGameOfUr
             }
         }
 
-        public void Phase3() 
+        public void Phase3(int diceCount) 
         {
-            if (!CanPlay(WhoIsPlaying()))
+            // Check if player can play, if yes, let them choose token
+            if (!CanPlay(WhoIsPlaying(), diceCount))
             {
                 phase += 1;
                 turn = !turn;
@@ -107,10 +110,11 @@ namespace RoyalGameOfUr
                 Token token = WhoIsPlaying().ChooseToken();
                 if (!(token is null))
                 {
-                    if (CanMove(token))
+                    if (CanMove(token, diceCount))
                     {
                         if (!Move(token, DiceCount()))
                         {
+                            // if player didn't land on a rosette
                             turn = !turn;
                         }
                         phase += 1;
@@ -121,14 +125,16 @@ namespace RoyalGameOfUr
 
         public void Phase4() 
         {
+            // reset phase back to 0
             phase = 0;
         }
-        public bool CanPlay(Player player) 
+        public bool CanPlay(Player player, int diceCount) 
         {
+            // Check if there's any possible token to move
             bool canPlay = false;
             foreach (Token token in player.tokens) 
             {
-                if (CanMove(token)) 
+                if (CanMove(token, diceCount)) 
                 {
                     canPlay = true;
                     break;
@@ -136,9 +142,9 @@ namespace RoyalGameOfUr
             }
             return canPlay;
         }
-        public bool CanMove(Token token) 
+        public bool CanMove(Token token, int count) 
         {
-            int count = DiceCount();
+            // Check if the new tile wouldn't be out of range, occupied Rosette, or occupied by the same player's token
             if (!token.image.Visible) 
             {
                 return false;
@@ -192,6 +198,7 @@ namespace RoyalGameOfUr
 
         public int GetNewTile(Token token, int diceCount) 
         {
+            // Count which tile the token lands on
             if (player1.tokens.Contains(token))
             {
                 return (token.tile + diceCount) % 16;
@@ -211,7 +218,7 @@ namespace RoyalGameOfUr
         }
         public bool Move(Token token, int diceCount) 
         {
-            // True if player plays again (lands on rosette)
+            // Moves the token, returns true if player plays again (lands on rosette)
             board.tiles[token.tile].occupiedBy = null;
             token.tile = GetNewTile(token, diceCount);
 
@@ -315,6 +322,9 @@ namespace RoyalGameOfUr
 
         public void Reverse(int[] previousP1, int[] previousP2) 
         {
+            // Returns token.tile to its previous state (saved in the parameters)
+            // Fixes occupied tiles
+
             for (int i = 0; i < previousP1.Length; ++i)
             {
                 board.tiles[player1.tokens[i].tile].occupiedBy = null;
@@ -364,6 +374,7 @@ namespace RoyalGameOfUr
         }
         public int DiceCount() 
         {
+            // Counts dice with dots
             int count = 0;
             foreach (Dice dice in board.dice) 
             {
